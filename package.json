@@ -1,0 +1,14 @@
+{
+  "name": "my-project",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "firebase-tools": "^14.10.1",
+    "vite": "^5.4.8"
+  }
+}

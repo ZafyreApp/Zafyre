@@ -1,0 +1,64 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Regra para a coleção de usuários
+    match /users/{userId} {
+      // Permite ler qualquer perfil de usuário (para o swipe e feed)
+      allow read: if request.auth != null;
+      // Permite escrever apenas no próprio perfil
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Regra para posts
+    match /posts/{postId} {
+      // Permite ler qualquer post
+      allow read: if request.auth != null;
+      // Permite criar posts se autenticado
+      allow create: if request.auth != null && request.auth.uid == resource.data.userId;
+      // Permite atualizar e deletar apenas posts próprios
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
+    // Regra para chats
+    match /chats/{chatId} {
+      // Permite ler/escrever apenas se for participante do chat
+      allow read, write: if request.auth != null && 
+        request.auth.uid in resource.data.participants;
+        
+      // Subcoleção de mensagens
+      match /messages/{messageId} {
+        allow read, write: if request.auth != null && 
+          request.auth.uid in get(/databases/$(database)/documents/chats/$(chatId)).data.participants;
+      }
+    }
+    
+    // Regra para swipes
+    match /swipes/{swipeId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == resource.data.swiperId || request.auth.uid == resource.data.targetId);
+    }
+    
+    // Regra para userSwipes
+    match /userSwipes/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Regra para follows
+    match /follows/{followId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == resource.data.followerId;
+    }
+    
+    // Regra para conteúdo PPV
+    match /ppvContent/{contentId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == resource.data.creatorId;
+    }
+    
+    // Regra para solicitações de saque
+    match /payoutRequests/{requestId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+  }
+}

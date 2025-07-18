@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Zafyre App - Plataforma de Relacionamento e Criação de Conteúdo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#DAA520">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Zafyre">
+</head>
+<body>
+    <!-- Container de Autenticação -->
+    <div class="auth-container" id="auth-container">
+        <!-- Seção de Login -->
+        <div class="auth-section" id="login-section">
+            <div class="zafyre-logo">
+                <svg width="120" height="120" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge> 
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <circle cx="75" cy="75" r="70" fill="url(#goldGradient)" stroke="#B8860B" stroke-width="3" filter="url(#glow)"/>
+                    <text x="75" y="85" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000">Z</text>
+                    <path d="M 30 100 Q 75 120 120 100" stroke="#B8860B" stroke-width="3" fill="none"/>
+                    <circle cx="55" cy="55" r="3" fill="#B8860B"/>
+                    <circle cx="95" cy="55" r="3" fill="#B8860B"/>
+                </svg>
+            </div>
+            <h2>Bem-vindo de volta!</h2>
+            <p style="color: var(--secondary-text-color); margin-bottom: 25px; text-align: center;">
+                Entre na plataforma mais inovadora para criadoras de conteúdo
+            </p>
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="email" id="login-email" placeholder="Seu e-mail" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder="Sua senha" required>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Lembrar de mim</label>
+                </div>
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+            </form>
+            <div class="auth-links">
+                <p class="auth-link">Não tem uma conta? <a href="#" id="show-register">Cadastre-se agora</a></p>
+                <p class="auth-link"><a href="#" id="forgot-password">Esqueci minha senha</a></p>
+            </div>
+        </div>
+
+        <!-- Seção de Registro -->
+        <div class="auth-section hidden" id="register-section">
+            <div class="zafyre-logo">
+                <svg width="120" height="120" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="goldGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow2">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge> 
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <circle cx="75" cy="75" r="70" fill="url(#goldGradient2)" stroke="#B8860B" stroke-width="3" filter="url(#glow2)"/>
+                    <text x="75" y="85" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000">Z</text>
+                    <path d="M 30 100 Q 75 120 120 100" stroke="#B8860B" stroke-width="3" fill="none"/>
+                    <circle cx="55" cy="55" r="3" fill="#B8860B"/>
+                    <circle cx="95" cy="55" r="3" fill="#B8860B"/>
+                </svg>
+            </div>
+            <h2>Crie sua conta</h2>
+            <p style="color: var(--secondary-text-color); margin-bottom: 25px; text-align: center;">
+                Junte-se à comunidade Zafyre e monetize seu conteúdo
+            </p>
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" id="register-username" placeholder="Nome de usuário" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="register-email" placeholder="Seu e-mail" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-password" placeholder="Crie uma senha" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="register-confirm-password" placeholder="Confirme sua senha" required>
+                </div>
+                <div class="input-group">
+                    <select id="register-gender" required>
+                        <option value="">Selecione seu gênero</option>
+                        <option value="Feminino">Feminino (Criadora)</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="register-age" placeholder="Sua idade" min="18" max="99" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="register-location" placeholder="Cidade, Estado (opcional)">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="register-interests" placeholder="Seus interesses (separados por vírgula)">
+                </div>
+                <div class="input-group">
+                    <textarea id="register-bio" placeholder="Conte um pouco sobre você..." rows="3"></textarea>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="over-18" required>
+                    <label for="over-18">Confirmo que sou maior de 18 anos</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="accept-terms" required>
+                    <label for="accept-terms">Aceito os Termos de Uso e Política de Privacidade</label>
+                </div>
+                <button type="submit" class="auth-button">
+                    <i class="fas fa-user-plus"></i> Criar Conta
+                </button>
+            </form>
+            <p class="auth-link">Já tem uma conta? <a href="#" id="show-login">Entre aqui</a></p>
+        </div>
+    </div>
+
+    <!-- Container Principal do App -->
+    <div class="app-container hidden" id="app-container">
+        <!-- Header do App -->
+        <div class="app-header" id="app-header">
+            <div class="app-logo">
+                <svg width="40" height="40" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="headerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#DAA520;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="75" cy="75" r="70" fill="url(#headerGradient)" stroke="#B8860B" stroke-width="3"/>
+                    <text x="75" y="85" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000">Z</text>
+                </svg>
+            </div>
+            <div class="header-actions">
+                <button class="notification-btn" id="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge hidden" id="notification-badge">0</span>
+                </button>
+                <span id="current-user-name" style="color: var(--primary-color); font-weight: 600;"></span>
+            </div>
+        </div>
+
+        <!-- Área de Conteúdo -->
+        <div class="app-content" id="app-content">
+            <!-- Feed Section -->
+            <div class="section" id="feed-section">
+                <h2><i class="fas fa-home"></i> Feed Social</h2>
+
+                <!-- Criação de Post -->
+                <div class="create-post">
+                    <textarea id="post-text" placeholder="No que você está pensando hoje?"></textarea>
+                    <div class="create-post-actions">
+                        <input type="file" id="post-image" accept="image/*" style="display: none;">
+                        <button class="file-upload-btn" onclick="document.getElementById('post-image').click()">
+                            <i class="fas fa-image"></i> Foto
+                        </button>
+                        <button class="publish-btn" id="submit-post">
+                            <i class="fas fa-paper-plane"></i> Publicar
+                        </button>
+                    </div>
+                    <img id="image-preview" src="#" alt="Pré-visualização" class="hidden" style="width: 100%; max-height: 200px; object-fit: cover; border-radius: 12px; margin-top: 15px;">
+                </div>
+
+                <!-- Container de Posts -->
+                <div class="posts-container" id="posts-container">
+                    <!-- Posts serão carregados dinamicamente -->
+                </div>
+            </div>
+
+            <!-- Swipe Section -->
+            <div class="section hidden" id="swipe-section">
+                <h2><i class="fas fa-fire"></i> Descobrir Pessoas</h2>
+
+                <div class="swipe-container">
+                    <div class="swipe-cards-area" id="swipe-cards-container">
+                        <!-- Cards de perfil para swipe -->
+                        <div class="no-more-profiles hidden" id="no-more-profiles">
+                            <div style="text-align: center; padding: 40px;">
+                                <i class="fas fa-heart" style="font-size: 3em; color: var(--primary-color); margin-bottom: 20px;"></i>
+                                <h3>Não há mais perfis por agora</h3>
+                                <p>Volte mais tarde ou ajuste seus filtros de busca!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swipe-buttons">
+                        <button class="swipe-btn dislike-btn" id="dislike-button">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button class="swipe-btn superlike-btn" id="superlike-button">
+                            <i class="fas fa-star"></i>
+                        </button>
+                        <button class="swipe-btn like-btn" id="like-button">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="section hidden" id="chat-section">
+                <h2><i class="fas fa-comment-dots"></i> Conversas</h2>
+
+                <div class="chat-list" id="chat-list-container">
+                    <div class="no-chats-message text-center" id="no-chats-message" style="padding: 40px;">
+                        <i class="fas fa-comments" style="font-size: 3em; color: var(--primary-color); margin-bottom: 20px;"></i>
+                        <h3>Nenhuma conversa ainda</h3>
+                        <p>Comece a deslizar para encontrar pessoas interessantes!</p>
+                    </div>
+                </div>
+
+                <!-- Modal de Conversa -->
+                <div class="chat-conversation hidden" id="chat-conversation-modal">
+                    <div class="chat-header">
+                        <button class="back-btn" id="back-to-chats-button">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <div class="chat-partner-info">
+                            <img src="" alt="Avatar" class="chat-partner-avatar">
+                            <span class="chat-partner-name">Nome do Usuário</span>
+                        </div>
+                        <button class="media-btn" style="background: var(--warning-color);">
+                            <i class="fas fa-video"></i>
+                        </button>
+                    </div>
+
+                    <div class="chat-messages" id="chat-messages-container">
+                        <!-- Mensagens aparecerão aqui -->
+                    </div>
+
+                    <div class="chat-input">
+                        <div class="media-buttons">
+                            <input type="file" id="chat-image-input" accept="image/*" style="display: none;">
+                            <button class="media-btn" onclick="document.getElementById('chat-image-input').click()">
+                                <i class="fas fa-image"></i>
+                            </button>
+                            <input type="file" id="chat-audio-input" accept="audio/*" style="display: none;">
+                            <button class="media-btn" onclick="document.getElementById('chat-audio-input').click()">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="message-input" id="chat-message-input" placeholder="Digite sua mensagem...">
+                        <button class="send-btn" id="send-chat-message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Section -->
+            <div class="section hidden" id="profile-section">
+                <div class="profile-container">
+                    <!-- Header do Perfil -->
+                    <div class="profile-header-section">
+                        <div class="profile-avatar-container">
+                            <img id="profile-pic-display" src="https://via.placeholder.com/120" alt="Foto de Perfil" class="profile-avatar">
+                            <input type="file" id="profile-pic-upload" accept="image/*" style="display: none;">
+                            <div class="creator-badge hidden" id="creator-badge" title="Criadora Verificada">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                        </div>
+
+                        <div class="profile-name" id="profile-username-display">Nome do Usuário</div>
+                        <p id="profile-bio-display" style="color: var(--secondary-text-color); margin-bottom: 20px;">Biografia do usuário...</p>
+
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="profile-age-display">25</span>
+                                <span class="stat-label">Anos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="profile-followers-count">0</span>
+                                <span class="stat-label">Seguidores</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="profile-posts-count">0</span>
+                                <span class="stat-label">Posts</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <button onclick="document.getElementById('profile-pic-upload').click()" style="background: var(--accent-color); color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; margin-right: 10px;">
+                                <i class="fas fa-camera"></i> Mudar Foto
+                            </button>
+                            <button id="edit-profile-button" style="background: var(--primary-color); color: var(--secondary-color); border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">
+                                <i class="fas fa-edit"></i> Editar Perfil
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ZafyrePay - Carteira Virtual (Feminino) -->
+                    <div class="zafyrepay-section hidden" id="zafyrepay-section">
+                        <div style="text-align: center;">
+                            <i class="fas fa-wallet" style="font-size: 2em; margin-bottom: 15px;"></i>
+                            <h3 style="margin-bottom: 10px;">💰 ZafyrePay</h3>
+                            <div class="wallet-balance" id="wallet-balance-display">R$ 0,00</div>
+                            <div class="wallet-balance-real">
+                                <span id="wallet-zafyrecoins-display">0</span> ZafyreCoins
+                            </div>
+                            <button class="withdraw-btn" id="request-payout-button">
+                                <i class="fas fa-money-bill-wave"></i> Solicitar Saque
+                            </button>
+                            <div style="margin-top: 15px; font-size: 0.8em; opacity: 0.8;">
+                                Saques: R$ 50 - R$ 500/dia • 11h-18h • Dias úteis
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ZafyreShop - Loja Virtual -->
+                    <div class="zafyreshop-section" id="zafyreshop-section">
+                        <div class="shop-title">
+                            <i class="fas fa-shopping-bag"></i>
+                            ZafyreShop
+                        </div>
+
+                        <!-- Pacotes Premium -->
+                        <h4 style="margin-bottom: 15px; color: var(--text-color);">📈 Assinatura Premium</h4>
+                        <div class="premium-packages" id="premium-packages">
+                            <!-- Pacotes serão carregados dinamicamente baseado no gênero -->
+                        </div>
+
+                        <!-- Compra de ZafyreCoins -->
+                        <h4 style="margin-bottom: 15px; margin-top: 25px; color: var(--text-color);">💰 Comprar ZafyreCoins</h4>
+                        <div class="premium-packages" id="coin-packages">
+                            <div class="package-card" onclick="purchaseCoins(100, 4.99)">
+                                <div class="package-title">100 ZafyreCoins</div>
+                                <div class="package-price">R$ 4,99</div>
+                                <div class="package-features">Valor básico</div>
+                            </div>
+                            <div class="package-card" onclick="purchaseCoins(250, 9.99)">
+                                <div class="package-title">250 ZafyreCoins</div>
+                                <div class="package-price">R$ 9,99</div>
+                                <div class="package-features">Mais popular</div>
+                            </div>
+                            <div class="package-card" onclick="purchaseCoins(600, 19.99)">
+                                <div class="package-title">600 ZafyreCoins</div>
+                                <div class="package-price">R$ 19,99</div>
+                                <div class="package-features">Melhor valor</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ZafyreCreators - Área de Criação (Apenas Feminino) -->
+                    <div class="creators-section hidden" id="zafyrecreators-section">
+                        <div class="creators-title">
+                            <i class="fas fa-star"></i>
+                            ZafyreCreators
+                        </div>
+
+                        <!-- Preços de Assinatura -->
+                        <div class="subscription-pricing">
+                            <h4 style="margin-bottom: 15px;">💎 Defina seus Preços de Assinatura</h4>
+                            <div class="price-input-group">
+                                <label>Assinatura Mensal (mín. R$ 9,99):</label>
+                                <input type="number" id="sub-price-monthly" placeholder="9.99" min="9.99" step="0.01">
+                            </div>
+                            <div class="price-input-group">
+                                <label>Assinatura Trimestral (mín. R$ 29,99):</label>
+                                <input type="number" id="sub-price-quarterly" placeholder="29.99" min="29.99" step="0.01">
+                            </div>
+                            <div class="price-input-group">
+                                <label>Assinatura Semestral (mín. R$ 59,99):</label>
+                                <input type="number" id="sub-price-semiannual" placeholder="59.99" min="59.99" step="0.01">
+                            </div>
+                            <button onclick="saveSubscriptionPrices()" style="background: white; color: var(--creator-color); border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%;">
+                                <i class="fas fa-save"></i> Salvar Preços
+                            </button>
+                        </div>
+
+                        <!-- Upload de Conteúdo PPV -->
+                        <div class="ppv-upload-section">
+                            <h4 style="margin-bottom: 15px;">📹 Upload de Conteúdo PPV</h4>
+                            <p style="font-size: 0.9em; margin-bottom: 15px; opacity: 0.9;">Crie conteúdo exclusivo para seus assinantes</p>
+                            
+                            <input type="text" id="ppv-title" placeholder="Título do conteúdo" style="width: 100%; padding: 10px; border: none; border-radius: 8px; background: rgba(255, 255, 255, 0.9); color: var(--secondary-color); margin-bottom: 10px;">
+                            
+                            <input type="number" id="ppv-price" placeholder="Preço (R$) - Mínimo R$ 1,99" min="1.99" step="0.01" style="width: 100%; padding: 10px; border: none; border-radius: 8px; background: rgba(255, 255, 255, 0.9); color: var(--secondary-color); margin-bottom: 10px;">
+                            
+                            <div style="margin-bottom: 10px;">
+                                <input type="file" id="ppv-upload-file" accept="image/*,video/*" style="margin-bottom: 10px;">
+                                <div style="font-size: 0.8em; color: rgba(255, 255, 255, 0.7);">
+                                    Formatos aceitos: JPG, PNG, GIF, MP4, WEBM (máx. 50MB)
+                                </div>
+                            </div>
+                            
+                            <img id="ppv-image-preview" class="hidden" style="max-width: 200px; margin-bottom: 10px; border-radius: 8px;">
+                            <video id="ppv-video-preview" class="hidden" controls style="max-width: 200px; margin-bottom: 10px; border-radius: 8px;"></video>
+                            
+                            <button id="submit-ppv" style="width: 100%; padding: 12px; background: white; color: var(--creator-color); border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: all 0.3s ease;">
+                                <i class="fas fa-upload"></i> Publicar Conteúdo PPV
+                            </button>
+                            
+                            <div style="margin-top: 15px; padding: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; font-size: 0.8em;">
+                                <i class="fas fa-info-circle"></i> Seus conteúdos PPV aparecerão no seu feed e poderão ser adquiridos por outros usuários.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seção de Posts do Usuário -->
+                    <div style="background: var(--card-background); border-radius: 15px; padding: 25px; margin-top: 25px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 20px; text-align: center;">
+                            <i class="fas fa-images"></i> Suas Publicações
+                        </h3>
+                        <div id="profile-posts-container">
+                            <!-- Posts do usuário aparecerão aqui -->
+                        </div>
+                    </div>
+
+                    <!-- Botão de Logout -->
+                    <div style="text-align: center; margin: 30px 0;">
+                        <button id="logout-button" style="background: var(--error-color); color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                            <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="navbar">
+            <div class="nav-item active" id="nav-feed">
+                <i class="fas fa-home"></i>
+                <span>Feed</span>
+            </div>
+            <div class="nav-item" id="nav-swipe">
+                <i class="fas fa-fire"></i>
+                <span>Descobrir</span>
+                <div class="nav-badge hidden" id="swipe-badge">∞</div>
+            </div>
+            <div class="nav-item" id="nav-chat">
+                <i class="fas fa-comment-dots"></i>
+                <span>Chat</span>
+                <div class="nav-badge hidden" id="chat-badge">0</div>
+            </div>
+            <div class="nav-item" id="nav-profile">
+                <i class="fas fa-user"></i>
+                <span>Perfil</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modais -->
+
+    <!-- Modal de Edição de Perfil -->
+    <div id="edit-profile-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Editar Perfil</h3>
+                <button class="close-btn" id="close-edit-profile-modal">&times;</button>
+            </div>
+            <form id="edit-profile-form">
+                <div class="input-group">
+                    <label>Nome de Usuário:</label>
+                    <input type="text" id="edit-username" required>
+                </div>
+                <div class="input-group">
+                    <label>Biografia:</label>
+                    <textarea id="edit-bio" rows="4"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Idade:</label>
+                    <input type="number" id="edit-age" min="18" required>
+                </div>
+                <div class="input-group">
+                    <label>Localização:</label>
+                    <input type="text" id="edit-location">
+                </div>
+                <div class="input-group">
+                    <label>Interesses:</label>
+                    <input type="text" id="edit-interests" placeholder="Separados por vírgula">
+                </div>
+                <button type="submit" style="background: var(--primary-color); color: var(--secondary-color); border: none; padding: 12px 25px; border-radius: 12px; font-weight: 600; cursor: pointer; width: 100%;">
+                    <i class="fas fa-save"></i> Salvar Alterações
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Comentários -->
+    <div id="comments-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Comentários</h3>
+                <button class="close-btn" id="close-comments-modal">&times;</button>
+            </div>
+            <div style="max-height: 400px; overflow-y: auto; margin-bottom: 20px;">
+                <div id="post-comments-container">
+                    <!-- Comentários aparecerão aqui -->
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <textarea id="comment-text-input" placeholder="Escreva um comentário..." rows="2" style="flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 12px; background: var(--input-background); color: var(--text-color); resize: vertical;"></textarea>
+                <button id="send-comment-button" style="background: var(--primary-color); color: var(--secondary-color); border: none; padding: 10px 15px; border-radius: 12px; cursor: pointer;">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container de Notificações Toast -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+
+    <script>
+        // Funções globais para compras
+        function purchaseCoins(amount, price) {
+            showToast(`🛒 Comprar ${amount} ZafyreCoins por R$ ${price.toFixed(2)}.\n\nIntegração com Mercado Pago em breve!`, 'info');
+        }
+
+        function purchasePremium(period, price, userGender) {
+            const periods = {
+                'monthly': 'Mensal',
+                'quarterly': 'Trimestral', 
+                'semiannual': 'Semestral',
+                'annual': 'Anual'
+            };
+            showToast(`👑 Adquirir Premium ${periods[period]} por R$ ${price.toFixed(2)}.\n\nIntegração com Mercado Pago em breve!`, 'info');
+        }
+
+        function saveSubscriptionPrices() {
+            const monthly = parseFloat(document.getElementById('sub-price-monthly').value) || 9.99;
+            const quarterly = parseFloat(document.getElementById('sub-price-quarterly').value) || 29.99;
+            const semiannual = parseFloat(document.getElementById('sub-price-semiannual').value) || 59.99;
+
+            if (monthly < 9.99 || quarterly < 29.99 || semiannual < 59.99) {
+                showToast('❌ Os preços não podem ser menores que os valores mínimos.', 'error');
+                return;
+            }
+
+            showToast('💎 Preços de assinatura salvos com sucesso!', 'success');
+        }
+
+        function publishPpvContent() {
+            const file = document.getElementById('ppv-upload-file').files[0];
+            const price = parseFloat(document.getElementById('ppv-price').value);
+            const description = document.getElementById('ppv-description').value.trim();
+
+            if (!file || !price || price < 1.99 || !description) {
+                showToast('❌ Preencha todos os campos. Preço mínimo: R$ 1,99', 'error');
+                return;
+            }
+
+            showToast('⭐ Conteúdo PPV será publicado!', 'success');
+
+            // Limpar formulário
+            document.getElementById('ppv-upload-file').value = '';
+            document.getElementById('ppv-price').value = '';
+            document.getElementById('ppv-description').value = '';
+            document.getElementById('ppv-image-preview').classList.add('hidden');
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
