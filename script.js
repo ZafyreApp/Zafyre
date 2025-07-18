@@ -30,16 +30,27 @@ const DAILY_FREE_MESSAGES = 10; // Número de mensagens gratuitas por dia por us
 const MESSAGE_COST = 15; // Custo de uma mensagem em ZafyreCoins (para homens não-premium não-seguidores mútuos)
 const MINIMUM_MESSAGES_FOR_MEDIA = 10; // Mínimo de mensagens trocadas para desbloquear mídias no chat
 
-// --- Inicialização do Firebase ---
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyC_51uWY3vxVQ325S5C3wIOnCpTTul7QzM",
-    authDomain: "zafyre-app.firebaseapp.com",
-    projectId: "zafyre-app",
-    storageBucket: "zafyre-app.firebasestorage.app",
-    messagingSenderId: "899874302896",
-    appId: "1:899874302896:web:2311574e15935cfb77c475",
-    measurementId: "G-T9C70PETFN"
+  apiKey: "AIzaSyC_51uWY3vxVQ325S5C3wIOnCpTTul7QzM",
+  authDomain: "zafyre-app.firebaseapp.com",
+  projectId: "zafyre-app",
+  storageBucket: "zafyre-app.firebasestorage.app",
+  messagingSenderId: "899874302896",
+  appId: "1:899874302896:web:2311574e15935cfb77c475",
+  measurementId: "G-T9C70PETFN"
 };
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 // --- Funções Auxiliares e Globais ---
 
