@@ -33,6 +33,10 @@ const MINIMUM_MESSAGES_FOR_MEDIA = 10; // Mínimo de mensagens trocadas para des
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+// >>> ADICIONE ESSAS DUAS LINHAS PARA AUTENTICAÇÃO E FIRESTORE <<<
+import { getAuth } from "firebase/auth"; // Importa o serviço de autenticação
+import { getFirestore } from "firebase/firestore"; // Importa o serviço do Firestore
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -51,6 +55,21 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+// >>> ADICIONE ESSAS DUAS LINHAS PARA INICIALIZAR AUTH E FIRESTORE <<<
+export const auth = getAuth(app); // Inicializa o serviço de autenticação
+export const db = getFirestore(app); // Inicializa o serviço do Firestore
+
+// Agora, você pode usar 'auth' e 'db' em outras partes do seu script.js
+// Exemplo de como você usaria para login:
+// import { auth } from './script.js'; // se estiver em outro arquivo
+// signInWithEmailAndPassword(auth, email, password)
+//   .then(...)
+//   .catch(...)
+
+// Exemplo de como você usaria para Firestore:
+// import { db } from './script.js'; // se estiver em outro arquivo
+// const docRef = doc(db, "users", "alovelace");
+// setDoc(docRef, { first: "Ada", last: "Lovelace", born: 1815 });
 
 // --- Funções Auxiliares e Globais ---
 
